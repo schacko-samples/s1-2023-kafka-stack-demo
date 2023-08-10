@@ -17,7 +17,7 @@ For convenience, we provide a docker-compose script, that allows you to run a th
 This repository contains several standalone Spring Boot applications for demonstrating various features mentioned during the talk.
 Navigate to the README on each application for more details.
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-kafka-app0/src/main/java/app0/SpringKafkaApp0.java[spring-kafka-app0 - Basic Application to Publish and Consume Text Based Records]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-kafka-app0/src/main/java/app0/SpringKafkaApp0.java[spring-kafka-app0 - Basic Application to Publish and Consume Text Based Records]
 
 This application creates a Kafka topic named `spring-kafka-app0-demo1` with a single partition.
 Then it publishes random text data to this topic using `KafkaTemplate` and then consumes them using a `KafkaListener`.
@@ -30,7 +30,7 @@ The listener simply consumes the records and prints them on the console.
 
 This application also includes a basic JUnit 5 based test using EmbeddedKafkaBroker.
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-kafka-app1/src/main/java/app1/SpringKafkaApp1.java[spring-kafka-app1 - Advanced application with two publishers and listeners with initial assignment]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-kafka-app1/src/main/java/app1/SpringKafkaApp1.java[spring-kafka-app1 - Advanced application with two publishers and listeners with initial assignment]
 
 In this application, we have two publishers both using custom `KafkaTemplate` beans.
 One `KafkaTemplate` uses `Long` as the key type and the other uses `UUID`, while both of them use `String` as value type.
@@ -53,7 +53,7 @@ curl -X POST  http://localhost:8080/publish/demo2
 The first command invokes the first publisher that publishes to topic `spring-kafka-app1-demo1` and the second one for the topic `spring-kafka-app1-demo2`.
 Listeners log the data received on the console with the key, partition and offset received from.
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-kafka-app2/src/main/java/app2/SpringKafkaApp2.java[spring-kafka-app2 - JsonSerializer and JsonDeserializer in action]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-kafka-app2/src/main/java/app2/SpringKafkaApp2.java[spring-kafka-app2 - JsonSerializer and JsonDeserializer in action]
 
 In this app, we use a POJO for publishing and consuming using the `JsonSerializer` and `JsonDeserializer` from Spring for Apache Kafka.
 
@@ -62,7 +62,7 @@ It publishes a domain object `Foo` into the topic and then consumes it using a `
 
 Take a look at the `application.properties` configuration file for seeing how the serializer/deserializer properties are configured.
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-kafka-app3/src/main/java/app3/SpringKafkaApp3.java[spring-kafka-app3 - Seeking to specific offsets]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-kafka-app3/src/main/java/app3/SpringKafkaApp3.java[spring-kafka-app3 - Seeking to specific offsets]
 
 In this application, we have a publisher and a listener.
 The listener extends from `AbstractConsumerSeekAware` which implements `ConsumerSeekAware`.
@@ -71,7 +71,7 @@ Application creates a topic named `spring-kafka-app3-demo` with a single partiti
 Each time the listener starts, we always seek the partition to offset 20.
 The publisher sends 100 records each time when the app starts.
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-kafka-app4/src/main/java/app4/SpringKafkaApp4.java[spring-kafka-app4 - Error Handling]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-kafka-app4/src/main/java/app4/SpringKafkaApp4.java[spring-kafka-app4 - Error Handling]
 
 This application demonstrates how container error handling works in Spring for Apache Kafka.
 The application has a publisher which is invoked through a REST endpoint.
@@ -91,7 +91,7 @@ In order to exercise the app, run it first and then issue the following CURL com
 curl -X POST  http://localhost:8080/publish/demo
 ```
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-kafka-app5/src/main/java/app5/SpringKafkaApp5.java[spring-kafka-app5 - ErrorHandlingDeserializer]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-kafka-app5/src/main/java/app5/SpringKafkaApp5.java[spring-kafka-app5 - ErrorHandlingDeserializer]
 
 This application demonstrates the `ErrorHandlingDeserializer` in action.
 We have a publisher that sends data as `String`, but the consumer expects an `Integer`, thus it causes a deserialization error.
@@ -102,7 +102,7 @@ Since deserialization exceptions are not retried by default, the `DefaultErrorHa
 We configure the error handler with a `DeadLetterPublishingRecoverer` for the records in error to be sent.
 The application provides a convenient `KafkaListener` to consumer from the DLT topic (`spring-kafka-app5-demo.DLT`).
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/tree/main/spring-kafka-app6/src/main/java/app6[spring-kafka-app6 - Request-Reply using ReplyingKafkaTemplate]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/tree/main/spring-kafka-app6/src/main/java/app6[spring-kafka-app6 - Request-Reply using ReplyingKafkaTemplate]
 
 In this application we see how the request-reply semantics works in Spring for Apache Kafka using the `ReplyingKafkaTemplate`.
 There are two packages given - app6.request and app6.reply.
@@ -126,7 +126,18 @@ curl -X POST -H "Content-Type: text/plain" --data "hello request-reply in Spring
 
 On the console output on the request application, you should see the received text.
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-integration-kafka-app/src/main/java/integration/SpringIntegrationKafkaApp.java[spring-integration-kafka-app - Spring Integration Kafka Outbound Channel Adapter and Message Driven Channel Adapter Demo]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/tree/main/spring-kafka-app7/src/main/java/app7/SpringKafkaApp7.java[spring-kafka-app7 - Non-blocking Retries]
+
+In this application, we see how non-blocking retries work.
+Two records are sent, with values "one" and "two"; the listener throws an exception when it receives "one".
+This record then goes through the non-blocking retry chain until finally ending up in the dead letter topic.
+We can see that the "two" record is successfully processed before "one" is retried.
+
+In order to run the app, simply start `SpringKafkaApp7`.
+
+On the console you should see the record delivery attempts with "one" being retried after 2 seconds, then 3, then 4.5, then 6.75, then to the DLT.
+
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-integration-kafka-app/src/main/java/integration/SpringIntegrationKafkaApp.java[spring-integration-kafka-app - Spring Integration Kafka Outbound Channel Adapter and Message Driven Channel Adapter Demo]
 
 This is an application in which we demonstrate the usage of Spring Integration Kafka support.
 This is a basic application that shows the Kafka outbound channel adapter and message driven channel adapter.
@@ -137,7 +148,7 @@ The application runner bean sends messages to a message channel called `toKafka`
 Message driven channel adapter consumes from the topic and puts the messages on another message channel (`fromKafka`).
 The application runner in the app receives from this channel `fromKafka` and prints the information on the console.
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-cloud-stream-app1/src/main/java/scst/app1/SpringCloudStreamApp1Application.java[spring-cloud-stream-app1 - Basic Spring Cloud Stream App with Function Composition]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-cloud-stream-app1/src/main/java/scst/app1/SpringCloudStreamApp1Application.java[spring-cloud-stream-app1 - Basic Spring Cloud Stream App with Function Composition]
 
 This is a basic Spring Cloud Stream application in which we demonstrate the functioning of a supplier, function and consumer.
 Supplier produces the current time in milliseconds as a `Long` value.
@@ -148,7 +159,7 @@ Take a look at the application.properties to see how the functions are activated
 
 In order to run the application, simply run it, and you will see the data getting logged on the console as UTC time.
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-cloud-stream-app2/src/main/java/scst/app2/SpringCloudStreamApp2Application.java[spring-cloud-stream-app2 - Spring Cloud Stream/StreamBridge API demo]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-cloud-stream-app2/src/main/java/scst/app2/SpringCloudStreamApp2Application.java[spring-cloud-stream-app2 - Spring Cloud Stream/StreamBridge API demo]
 
 In this application, we show how non-functional style suppliers can be written for on-demand triggering using the `StreamBridge` API.
 The application has a REST endpoint, which upon invoking wil trigger the publishing of the data through the `StreamBridge` API.
@@ -163,7 +174,7 @@ curl -X POST -H "Content-Type: text/plain" --data "StreamBridge Demo" http://loc
 
 The consumer will print the data that is published to the topic through `StreamBridge`.
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-cloud-stream-app3/src/main/java/scst/app3/SpringCloudStreamApp3Application.java[spring-cloud-stream-app3 - Spring Cloud Stream Kafka Streams Basic]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-cloud-stream-app3/src/main/java/scst/app3/SpringCloudStreamApp3Application.java[spring-cloud-stream-app3 - Spring Cloud Stream Kafka Streams Basic]
 
 In this application, we see how Spring Cloud Stream Kafka Streams binder works.
 
@@ -226,7 +237,7 @@ curl -d '{"state":"STOPPED"}' -H "Content-Type: application/json" -X POST http:/
 curl -d '{"state":"STARTED"}' -H "Content-Type: application/json" -X POST http://localhost:8080/actuator/bindings/process-in-0
 ```
 
-=== https://github.com/schacko-samples/kafka-summit-london-2022/blob/main/spring-cloud-stream-app4/user-clicks-per-region/src/main/java/scst/app4/SpringCloudStreamApp4Application.java[spring-cloud-stream-app4 - Spring Cloud Stream Kafka Streams Advanced]
+=== https://github.com/schacko-samples/s1-2023-kafka-stack-demo/blob/main/spring-cloud-stream-app4/user-clicks-per-region/src/main/java/scst/app4/SpringCloudStreamApp4Application.java[spring-cloud-stream-app4 - Spring Cloud Stream Kafka Streams Advanced]
 
 This is an advanced sample of a Spring Cloud Stream processor using Kafka Streams support that shows both KStream and KTable bindings.
 
