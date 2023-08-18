@@ -27,14 +27,14 @@ public class UserClicksRegionProducerApplication {
 	@ResponseBody
 	public void region(@PathVariable("user") String user, @PathVariable("region") String region) {
 		streamBridge.send("regions", MessageBuilder.withPayload(region)
-				.setHeader(KafkaHeaders.MESSAGE_KEY, user).build());
+				.setHeader(KafkaHeaders.KEY, user).build());
 	}
 
 	@RequestMapping(value = "/user-clicks/{user}/{clicks}", method = RequestMethod.POST)
 	@ResponseBody
 	public void clicks(@PathVariable("user") String user, @PathVariable("clicks") long clicks) {
 		streamBridge.send("clicks", MessageBuilder.withPayload(clicks)
-				.setHeader(KafkaHeaders.MESSAGE_KEY, user).build());
+				.setHeader(KafkaHeaders.KEY, user).build());
 	}
 
 }

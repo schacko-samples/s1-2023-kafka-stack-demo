@@ -39,7 +39,7 @@ public class SpringKafkaApp5 {
 		@Bean
 		public ApplicationRunner runner(KafkaTemplate<String, Object> kafkaTemplate) {
 			return args -> {
-				Map<Class<?>, Serializer> delegates = new HashMap<>();
+				Map<Class<?>, Serializer<?>> delegates = new HashMap<>();
 				delegates.put(byte[].class, new ByteArraySerializer());
 				delegates.put(String.class, new StringSerializer());
 				((DefaultKafkaProducerFactory<String, Object>) kafkaTemplate.getProducerFactory())
@@ -92,7 +92,7 @@ public class SpringKafkaApp5 {
 		@KafkaListener(id = "from.dlt-app5", topics = "spring-kafka-app5-demo.DLT",
 				properties = "value.deserializer:org.apache.kafka.common.serialization.ByteArrayDeserializer")
 		public void listenFromDlt(byte[] in,
-								  @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
+								  @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
 								  @Header(KafkaHeaders.OFFSET) int offset) {
 			logger.info("DLT Data Received : {} from partition {} and offset {}.", in, partition, offset);
 		}

@@ -14,7 +14,7 @@
 	<name>spring-kafka-app5</name>
 	<description>Basic App for Spring for Apache Kafka</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -24,3 +24,10 @@ management:
     web:
       exposure:
         include: metrics,health,bindings,kafkastreamstopology
+
+logging:
+  pattern:
+    console: "%d [%t] %m%n"
+  level:
+    root: off
+    scst.app4: info

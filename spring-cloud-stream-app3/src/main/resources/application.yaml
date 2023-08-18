@@ -28,3 +28,10 @@ management:
     web:
       exposure:
         include: metrics,health
+
+logging:
+  pattern:
+    console: "%d [%t] %m%n"
+  level:
+    root: off
+    scst.app3: info
