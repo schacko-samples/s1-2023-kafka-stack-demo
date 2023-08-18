@@ -55,7 +55,7 @@ public class SpringKafkaApp3 {
 	static class Listener extends AbstractConsumerSeekAware {
 
 		@KafkaListener(id = "sk-app3-demo-group", topics = "spring-kafka-app3-demo")
-		public void listen(String in,  @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
+		public void listen(String in,  @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
 						   @Header(KafkaHeaders.OFFSET) int offset) {
 			logger.info("Data Received : {} from partition {} and offset {}.", in, partition, offset);
 		}

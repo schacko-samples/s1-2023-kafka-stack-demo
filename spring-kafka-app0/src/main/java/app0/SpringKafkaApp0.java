@@ -12,7 +12,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFuture;
+
+import java.util.concurrent.CompletableFuture;
 
 @SpringBootApplication
 public class SpringKafkaApp0 {
@@ -35,7 +36,7 @@ public class SpringKafkaApp0 {
 		return args -> {
 			for (int i = 0; i < 100; i++) {
 				final Book book = faker.book();
-				final ListenableFuture<SendResult<String, String>> send = kafkaTemplate.send("spring-kafka-app0-demo1",
+				CompletableFuture<SendResult<String, String>> send = kafkaTemplate.send("spring-kafka-app0-demo1",
 						String.join(", ", book.title(), book.author(), book.genre(), book.publisher()));
 				send.get();
 			}

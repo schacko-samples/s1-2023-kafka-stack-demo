@@ -57,8 +57,8 @@ public class SpringKafkaApp1 {
 					@PartitionOffset(partition = "6-9", initialOffset = "0")
 			}),
 			properties = "key.deserializer:org.apache.kafka.common.serialization.LongDeserializer")
-	public void listen1(String in, @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) Long key,
-						@Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
+	public void listen1(String in, @Header(KafkaHeaders.RECEIVED_KEY) Long key,
+						@Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
 						@Header(KafkaHeaders.OFFSET) int offset) {
 		logger.info("Listener-1:: Data Received : {} with key {} from partition {} and offset {}.", in, key, partition, offset);
 	}
@@ -68,8 +68,8 @@ public class SpringKafkaApp1 {
 					partitionOffsets = @PartitionOffset(partition = "*", initialOffset = "0")
 			)},
 			properties = "key.deserializer:org.apache.kafka.common.serialization.UUIDDeserializer")
-	public void listen2(String in, @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) UUID key,
-						@Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
+	public void listen2(String in, @Header(KafkaHeaders.RECEIVED_KEY) UUID key,
+						@Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
 						@Header(KafkaHeaders.OFFSET) int offset) {
 		logger.info("Listener-2:: Data Received : {} with key {} from partition {} and offset {}.", in, key, partition, offset);
 	}

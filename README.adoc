@@ -121,7 +121,7 @@ To run the app, do the following.
 3. Go to a terminal and issue the following command.
 
 ```
-curl -X POST -H "Content-Type: text/plain" --data "hello request-reply in Spring for Apache Kafka" http://localhost:8080
+curl -X POST -H "Content-Type: text/plain" --data "hello request-reply in Spring for Apache Kafka" http://localhost:8080/publish/demo
 ```
 
 You should see the received text on the request application's console output.

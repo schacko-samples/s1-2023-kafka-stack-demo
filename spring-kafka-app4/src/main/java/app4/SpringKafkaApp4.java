@@ -85,8 +85,8 @@ public class SpringKafkaApp4 {
 
 		@KafkaListener(id = "sk-app4-demo-group", topics = "spring-kafka-app4-demo",
 				 		properties = "key.deserializer:org.apache.kafka.common.serialization.LongDeserializer")
-		public void listen(String in, @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) Long key,
-						   @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
+		public void listen(String in, @Header(KafkaHeaders.RECEIVED_KEY) Long key,
+						   @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
 						   @Header(KafkaHeaders.OFFSET) int offset) {
 			logger.info("Data Received : {} with key {} from partition {} and offset {}.", in, key, partition, offset);
 			if (offset > 0 && offset % 9 == 0) {
@@ -106,8 +106,8 @@ public class SpringKafkaApp4 {
 
 		@KafkaListener(id = "from.dlt", topics = "spring-kafka-app4-demo.DLT",
 				properties = "key.deserializer:org.apache.kafka.common.serialization.LongDeserializer")
-		public void listenFromDlt(String in, @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) Long key,
-						   @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
+		public void listenFromDlt(String in, @Header(KafkaHeaders.RECEIVED_KEY) Long key,
+						   @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
 						   @Header(KafkaHeaders.OFFSET) int offset) {
 			logger.info("DLT Data Received : {} with key {} from partition {} and offset {}.", in, key, partition, offset);
 		}
